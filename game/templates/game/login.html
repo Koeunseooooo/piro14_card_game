@@ -1,0 +1,29 @@
+
+{% extends 'game/base.html' %}
+{% load socialaccount %}
+{% providers_media_js %}
+
+{% block content %}
+<a href='/accounts/signup'>회원가입</a>
+{% comment %} 나중에 바꿀 예정 {% endcomment %}
+<br>
+
+{% if user.is_authenticated %}
+<br>1.
+{{ request.user.username }} 님이 로그인 중
+<br>2.
+{{ request.user }} 님이 로그인 중
+<br>3.
+{{ request.user.last_name }}{{ request.user.first_name }} 님이 로그인 중
+<!-- {{ user.username }} 님이 로그인 중 -->
+<!-- 이건 admin에서 또 따로 지정해줘야 하네~  -->
+
+{% else %}
+<a href= "{% provider_login_url 'google' %}">구글 로그인</a><br>
+<a href="{% provider_login_url 'kakao' %}">카카오 로그인은 사드세요...(?) 제발... </a><br>
+<a href="{% provider_login_url 'naver' %}">네이버 로그인</a><br>
+
+
+{% endif %}
+
+{% endblock %}

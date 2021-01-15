@@ -1,0 +1,18 @@
+{% extends "game/base.html" %}
+
+{% block content %}
+
+
+    <div class="login_content">
+        <div class="login_content_text">
+            <div>게임 option 선택하기</div>
+
+            <div id="login-buttons">
+                <a href="{% url 'game_alone' %}">혼자 게임하기</a>
+                <a href="{% url 'game' %}">다른 유저와 게임하기</a>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

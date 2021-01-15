@@ -37,6 +37,21 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'game',
+
+    'django.contrib.sites',
+
+    # allauth에 관한 내용들
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+
+    # provider
+    'allauth.socialaccount.providers.google' , #구글 로그인
+    'allauth.socialaccount.providers.kakao' , #카카오 로그인 ( 왜 안되니 ^^ )
+    'allauth.socialaccount.providers.naver', #네이버 로그인
+
+
 ]
 
 MIDDLEWARE = [
@@ -118,3 +133,25 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
+
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',  # 소셜로그인 정보를 User 모델 클래스에 저장
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
+
+SITE_ID = 2
+
+# django-allauth setting
+# 로그인/로그아웃 후 리디렉션 할 페이지
+# 'tif:index' 형식으로 쓸 수 있음
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
+ACCOUNT_LOGOUT_ON_GET = True  # 로그아웃 버튼 클릭 시 자동 로그아웃
+
+# # 이메일 확인을 하지 않음.
+SOCIAL_ACCOUNT_EMAIL_VERIFICATION = 'none'
+ACCOUNT_AUTHENTICATION_METHOD = 'Email'
+# ACCOUNT_AUTHENTICATION_METHOD = 'username'
+ACCOUNT_USERNAME_REQUIRED=False
+
