@@ -32,8 +32,9 @@ def game(request):
             cardBattle=form.save()
             cardBattle.from_user = request.user
             cardBattle.result = "진행중..."
-            cardBattle.from_user_num = request.user.id
+            # cardBattle.from_user_num = request.user.id
             # from_user_num으로 대응하는 게임번호를 찾을 수 있나?
+            # 왜 하는 거임 이거 ???
             cardBattle.save()
         return redirect("game_list")
 
@@ -69,8 +70,15 @@ def accept(request, pk):
         주목 여기 model 바꿔야 해요 (updown_choice뭐 이런거 하나 생성해야 함)
         '''
         # 여기에 랜덤으로 해야할듯??! ---> up_or_down ( 0 up / 1 down )
-        cardBattle.to_user_result = random_result(to_user_card_num, from_user_card_num, 0)
-        cardBattle.from_user_result = random_result(from_user_card_num, to_user_card_num, 0)
+        cardBattle.up_or_down = random.randint(0, 1)
+        up_or_down=cardBattle.up_or_down
+        if up_or_down == 0 :
+            cardBattle.game_option= " 숫자가 더 큰 사람이 대결에서 이깁니다 "
+        else :
+            cardBattle.game_option= " 숫자가 더 작은 사람이 대결에서 이깁니다"
+        
+        cardBattle.to_user_result = random_result(to_user_card_num, from_user_card_num, up_or_down)
+        cardBattle.from_user_result = random_result(from_user_card_num, to_user_card_num, up_or_down)
 
         # save_point
         if cardBattle.to_user_result == "승리" :

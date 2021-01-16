@@ -22,10 +22,11 @@ class CardBattle(models.Model):
         (list[3], list[3]),
         (list[4], list[4]),
     )
-    # 10개 중 무작위 5개 선택 - 그 중 한 개 선택 )
+    # 10개 중 무작위 5개 선택 - 그 중 한 개 선택 
     to_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="to_user", null=True, blank=True)
     from_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="from_user",null=True, blank=True)
     from_user_num = models.IntegerField(null=True , blank=True)
+    # 위에꺼 없어질 가능성 높음. 지금 활용 안하고 있는 중
     to_user_card_num = models.IntegerField( null=True, blank=True, choices=CARD_CHOICES)
     # to_user_rsp = models.ForeignKey(Weapons, on_delete=models.CASCADE, related_name='to_user_rsp', null=True, blank=True)
     from_user_card_num = models.IntegerField( null=True, blank=True, choices=CARD_CHOICES)
@@ -40,6 +41,8 @@ class CardBattle(models.Model):
     # 게임 종료 후 포인트
     from_user_point = models.IntegerField(null=True, blank=True)
     # 게임 종료 후 포인트
+    up_or_down = models.IntegerField(null=True, blank=True)
+    game_option = models.CharField(max_length=255, null=True, blank=True)
     
 
     # from_user_num=models.IntegerField(null=True, blank=True)
