@@ -1,7 +1,13 @@
 {% extends "game/base.html" %}
 
 {% block content %}
-<h1>hello 여긴 찐으로 카드 섞어서 게임하는 페이지 </h1>
 
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <table>
+            {{ form.as_p }}
+        </table>
+        <input type="submit" value="공격하기!" id="accept_input_button">
+    </form>
 
 {% endblock %}

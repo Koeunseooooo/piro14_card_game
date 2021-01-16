@@ -48,7 +48,7 @@ INSTALLED_APPS = [
 
     # provider
     'allauth.socialaccount.providers.google' , #구글 로그인
-    'allauth.socialaccount.providers.kakao' , #카카오 로그인 ( 왜 안되니 ^^ )
+    # 'allauth.socialaccount.providers.kakao' , #카카오 로그인 ( 왜 안되니 ^^ )
     'allauth.socialaccount.providers.naver', #네이버 로그인
 
 
@@ -155,3 +155,5 @@ ACCOUNT_AUTHENTICATION_METHOD = 'Email'
 # ACCOUNT_AUTHENTICATION_METHOD = 'username'
 ACCOUNT_USERNAME_REQUIRED=False
 
+# 유저 커스텀 하기
+# SOCIALACCOUNT_ADAPTER = 'adapters.SocialAccountAdapter'
