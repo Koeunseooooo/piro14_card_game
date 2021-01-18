@@ -8,7 +8,7 @@ class Profile(models.Model):
     rank=models.IntegerField(null=True, blank=True)
 
     def __str__(self):
-        return f"{self.user_me}의 총점은 {self.sum_poisnt}입니다"
+        return f"{self.user_me}의 총점은 {self.sum_point}입니다"
 
 class CardBattle(models.Model):
     list = []

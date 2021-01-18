@@ -107,7 +107,6 @@ def accept(request, pk):
         else :
             cardBattle.game_option= " 숫자가 더 작은 사람이 대결에서 이깁니다"
         
-
         
         
         cardBattle.to_user_result = random_result(to_user_card_num, from_user_card_num, up_or_down) 
@@ -115,8 +114,8 @@ def accept(request, pk):
 
         # save_point
         if cardBattle.to_user_result == "승리" :
-                cardBattle.to_user_point = to_user_card_num
-                cardBattle.from_user_point = -(from_user_card_num)
+            cardBattle.to_user_point = to_user_card_num
+            cardBattle.from_user_point = -(from_user_card_num)
         elif cardBattle.to_user_result == "패배" :
             cardBattle.to_user_point = -(to_user_card_num)
             cardBattle.from_user_point = from_user_card_num
