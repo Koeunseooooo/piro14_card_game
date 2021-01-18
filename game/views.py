@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import CardBattle
+from .models import CardBattle, Profile
 import random
+from django.contrib.auth.models import User 
 from .forms import *
 # Create your views here.
 
@@ -10,9 +11,49 @@ def main(request):
 def login(request):
     return render(request, 'game/login.html')
 
+    
+def ranking(request):
+    users=User.objects.all()
+    games_all=CardBattle.objects.all()
 
+    all_user_points=[]
+    each_user_points=[]
 
-# for i in range(5):
+    # 이 알고리즘은 정말 최악이야.. 그냥 game view 에서 바로 update 하면될것을... 난 똥이야 ...
+    for user in users:
+        game_all_to = games_all.filter(to_user=user)
+        game_all_from = games_all.filter(from_user=user)
+        if game_all_to.exists() or game_all_from.exists():
+            for game_to in game_all_to:
+                all_user_points.append(game_to.to_user_point)
+            for game_from in game_all_from :
+                all_user_points.append(game_from.from_user_point)
+            each_user_points.append(sum(all_user_points))
+            all_user_points.clear()
+    
+
+    for user,each_user_point in zip(users, each_user_points) :
+        Profile.objects.filter(user_me=user).update(sum_point=each_user_point)
+
+    profiles=Profile.objects.all()
+    profiles_order=profiles.order_by("-sum_point")
+
+    num=[]
+    for i in range(1,len(users)+1):
+        num.append(i)
+
+    for profile,n in zip(profiles_order, num) :
+        Profile.objects.filter(user_me=profile.user_me).update(rank=n)
+        
+    ctx = {
+        "users": users,
+        "games" : games_all , 
+        "ranking" : profiles_order ,
+
+    }
+    # each도 clear해야하는지..
+    return render(request, 'game/ranking.html', ctx)
+
 def game_list(request):
     game_list = CardBattle.objects.all()
     game_list_filter = game_list.filter(to_user=request.user) | game_list.filter(from_user=request.user)
@@ -52,8 +93,7 @@ def game_alone(request):
 def game_option(request):
     return render(request, 'game/game_option.html')
 
-def ranking(request):
-    return render(request, 'game/ranking.html')
+
 
 def accept(request, pk):
     if request.method == "POST":

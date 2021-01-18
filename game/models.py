@@ -2,10 +2,13 @@ from django.db import models
 from django.contrib.auth.models import User 
 import random
 # Create your models here.
-
 class Profile(models.Model):
-    sum_point = models.PositiveIntegerField(default=0)
-    
+    user_me=models.ForeignKey(User, on_delete=models.CASCADE, related_name="user_me", null=True, blank=True )
+    sum_point=models.IntegerField(default=0)
+    rank=models.IntegerField(null=True, blank=True)
+
+    def __str__(self):
+        return f"{self.user_me}의 총점은 {self.sum_poisnt}입니다"
 
 class CardBattle(models.Model):
     list = []
@@ -23,6 +26,7 @@ class CardBattle(models.Model):
         (list[4], list[4]),
     )
     # 10개 중 무작위 5개 선택 - 그 중 한 개 선택 
+    # 이렇게 하면 runserver 돌릴때만 숫자가 바뀜.. 해결책 없을까잉
     to_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="to_user", null=True, blank=True)
     from_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="from_user",null=True, blank=True)
     from_user_num = models.IntegerField(null=True , blank=True)
@@ -37,9 +41,9 @@ class CardBattle(models.Model):
     # 게임 종료후 result
     from_user_result = models.CharField(max_length=255, null=True, blank=True)
     # 게임 종료후 result
-    to_user_point = models.IntegerField(null=True, blank=True)
+    to_user_point = models.IntegerField(default=0)
     # 게임 종료 후 포인트
-    from_user_point = models.IntegerField(null=True, blank=True)
+    from_user_point = models.IntegerField(default=0)
     # 게임 종료 후 포인트
     up_or_down = models.IntegerField(null=True, blank=True)
     game_option = models.CharField(max_length=255, null=True, blank=True)

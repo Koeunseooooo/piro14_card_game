@@ -1,3 +1,9 @@
 {% extends "game/base.html" %}
 
-<h1>hello 순위와 총점 보는 페이지 </h1>
+{% block content %}
+
+    {% for rank in ranking %}
+     {{rank.rank}}등 {{ rank.user_me }}님 ! 총점수는 {{ rank.sum_point }}입니다
+    <br/>
+    {% endfor %}
+{% endblock %}
