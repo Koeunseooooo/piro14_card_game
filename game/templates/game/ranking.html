@@ -1,9 +1,10 @@
 {% extends "game/base.html" %}
 
 {% block content %}
-
     {% for rank in ranking %}
+    <!-- rank.user_me가 request.user라면 글자색이나 굵기 변형을 통해 강조되었으면 좋겠어용 -->
      {{rank.rank}}등 {{ rank.user_me }}님 ! 총점수는 {{ rank.sum_point }}입니다
     <br/>
     {% endfor %}
 {% endblock %}
+

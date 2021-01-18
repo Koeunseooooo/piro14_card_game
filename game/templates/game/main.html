@@ -9,16 +9,11 @@
             <br>
             <br>
         {% if user.is_authenticated %}
-            <br>1.
+
             {{ user.username }} 님이 로그인 중
-            <br>2.
-            {{ request.user }} 님이 로그인 중
-            <br>3.
-            {{ request.user.last_name }}{{ request.user.first_name }} 님이 로그인 중
-            <!-- {{ user.username }} 님이 로그인 중 -->
-            <!-- 이건 admin에서 또 따로 지정해줘야 하네~  -->
+            <!-- admin에서 이름 변경 가능 -->
             
-            <a href="{% url 'game_option' %}">
+            <a href="{% url 'game' %}">
                 <input class='main_content_text_button' type="button" value="게임하기">
             </a>
             <a href="{% url 'game_list' %}">
