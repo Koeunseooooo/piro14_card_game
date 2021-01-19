@@ -4,12 +4,16 @@
 {% providers_media_js %}
 
 {% block content %}
-<a href='/accounts/signup'>회원가입</a>
-{% comment %} 나중에 바꿀 예정 {% endcomment %}
-<br>
 
-<a href= "{% provider_login_url 'google' %}">구글 로그인</a><br>
-<a href="{% provider_login_url 'naver' %}">네이버 로그인</a><br>
+    <div class="login_content">
+        <div class="login_content_text">
+            <div>5초만에 로그인하고<br />숫자카드 뽑으러 가기</div>
 
+            <div id="login-buttons">
+                <a href="{% provider_login_url 'google' %}">구글 로그인</a>
+                <a href="{% provider_login_url 'naver' %}">네이버 로그인</a>
+            </div>
+        </div>
+    </div>
 
 {% endblock %}
