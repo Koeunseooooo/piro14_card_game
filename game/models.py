@@ -32,7 +32,7 @@ class CardBattle(models.Model):
     from_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="from_user",null=True, blank=True)
     from_user_num = models.IntegerField(null=True , blank=True)
     # 위에꺼 없어질 가능성 높음. 지금 활용 안하고 있는 중
-    to_user_card_num = models.IntegerField( null=True, blank=True, choices=CARD_CHOICES )
+    to_user_card_num = models.IntegerField( null=True, blank=True, choices=CARD_CHOICES, verbose_name='내가 고른 카드' )
     # to_user_rsp = models.ForeignKey(Weapons, on_delete=models.CASCADE, related_name='to_user_rsp', null=True, blank=True)
     from_user_card_num = models.IntegerField( null=True, blank=True, choices=CARD_CHOICES,verbose_name='내가 고른 카드' )
     # from_user_rsp = models.ForeignKey(Weapons, on_delete=models.CASCADE, related_name='from_user_rsp', null=True, blank=True)
