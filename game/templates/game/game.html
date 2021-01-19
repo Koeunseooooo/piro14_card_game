@@ -1,13 +1,13 @@
 {% extends "game/base.html" %}
 
 {% block content %}
-
-    <form action="" method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        <table>
-            {{ form.as_p }}
-        </table>
-        <input type="submit" value="공격하기!" id="accept_input_button">
-    </form>
-
+    <div id="accept_wrap">
+        <form action="" method="post">
+            {% csrf_token %}
+            <table>
+                {{ form.as_p }}
+            </table>
+            <input type="submit" value="공격하기!" id="accept_input_button">
+        </form>
+    </div>
 {% endblock %}

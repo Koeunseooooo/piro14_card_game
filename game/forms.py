@@ -9,8 +9,6 @@ class AttackForm(forms.ModelForm):
 
 
     def __init__(self, *args, **kwargs):
-        # print(kwargs["initial"]["current"])
-        # print(type(kwargs["initial"]["current"]))
         super(AttackForm, self).__init__(*args, **kwargs)
         self.fields["to_user"].queryset = User.objects.all().exclude(
             id=kwargs["initial"]["current_user"]
