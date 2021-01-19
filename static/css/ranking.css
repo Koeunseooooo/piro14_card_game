@@ -1,0 +1,115 @@
+#ranking_all_wrap {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#ranking_wrap {
+    width: 510px; height: 330px;
+    padding: 30px 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background: #141414;
+    border-radius: 7px;
+    box-shadow: 7px 7px 4px black;
+    margin : 0 auto;
+    text-align: center;
+}
+
+#ranking_wrap .ranking_title {
+    font-family: "Noto Sans KR", sans-serif;
+    font-weight: 700;
+    padding: 5px 0;
+    margin: 20px 0;
+    width:400px;
+    color : white;
+    display: flex;
+    width: 300px;
+    font-size: 25px;
+    justify-content: space-between;
+    align-items: center;
+    transition-duration: 0.5s;
+}
+
+/* #ranking_content_wrap div {
+    font-family: "Noto Sans KR", sans-serif;
+    font-weight: 700;
+    font-size : 18px;
+    color : white;
+    margin-bottom: 10px;
+    text-align : center ;
+} */
+
+#ranking_content_wrap .login_user {
+    padding: 5px 0;
+    margin: 20px 0;
+    color : yellow;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition-duration: 0.5s;
+
+    font-family: "Noto Sans KR", sans-serif;
+    font-weight: 700;
+    font-size : 18px;
+    margin-bottom: 10px;
+}
+
+#ranking_content_wrap .login_user:hover {
+    transform: scale(1.1);
+    border: 1px solid#ABF200;
+    padding: 10px 20px;
+}
+
+#ranking_content_wrap .other_users {
+    padding: 5px 0;
+    margin: 20px 0;
+    color : white ;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition-duration: 0.5s;
+
+    font-family: "Noto Sans KR", sans-serif;
+    font-weight: 700;
+    font-size : 18px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+#ranking_content_wrap .other_users:hover {
+    transform: scale(1.1);
+    border: 1px solid#ABF200;
+    padding: 10px 20px;
+}
+
+
+
+#out_ranking_button {
+    display: flex;
+    justify-content: center;
+    border-top : 10px;
+}
+
+.out_ranking_button {
+    background: none;
+    border: 2px solid#ABF200;
+    border-radius: 5px;
+    padding: 5px 10px;
+    color: #ABF200;
+    font-family: "Noto Sans KR", sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    transition-duration: 0.5s;
+}
+
+.out_ranking_button:hover {
+    background:#ABF200;
+    color: #202020;
+    font-weight: 900;
+    transform: scale(1.1);
+    cursor: pointer;
+}

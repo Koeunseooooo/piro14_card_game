@@ -12,7 +12,7 @@
 }
 
 #detail_wrap {
-    width: 510px; height: 280px;
+    width: 510px; height: 400px;
     padding: 30px 50px;
     display: flex;
     flex-direction: column;

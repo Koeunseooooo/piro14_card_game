@@ -1,14 +1,33 @@
 {% extends "game/base.html" %}
 
 {% block content %}
-    {% for rank in ranking %}
-    <!-- rank.user_me가 request.user라면 글자색이나 굵기 변형을 통해 강조되었으면 좋겠어용 -->
-    {% if rank.user_me == request.user %}
-    <div id=hello>{{rank.rank}}등 {{ rank.user_me }}님 ! 총점수는 {{ rank.sum_point }}입니다</div>
-    {% else %}
-    {{rank.rank}}등 {{ rank.user_me }}님 ! 총점수는 {{ rank.sum_point }}입니다
-    {% endif %}
-    <br/>
-    {% endfor %}
+
+<div id="ranking_all_wrap">
+    <div id="ranking_wrap">
+
+        <div class="ranking_title"> Piro 명예의 전당</div>
+        <div id="ranking_content_wrap">
+            {% for rank in ranking %}
+            <!-- rank.user_me가 request.user라면 글자색이나 굵기 변형을 통해 강조되었으면 좋겠어용 -->
+            {% if rank.user_me == request.user %}
+            <div class="login_user">{{rank.rank}}등 {{ rank.user_me }}님 ! 총점수 : {{ rank.sum_point }} 점 </div>
+            
+            {% else %}
+            <div class="other_users">{{rank.rank}}등 {{ rank.user_me }}님 ! 총점수 : {{ rank.sum_point }} 점 </div>
+            
+            {% endif %}
+            {% endfor %}
+           
+        </div>
+
+        <form action="{% url 'game_list' %}" id="out_ranking_button">
+            <input type="submit" value="전적 목록" class="out_ranking_button">
+        </form>
+    </div>
+</div>
+
+
+    
+
 {% endblock %}
 
