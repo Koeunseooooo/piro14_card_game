@@ -13,14 +13,14 @@
         <div id="detail_content_wrap">
             {% if game.to_user_card_num %}
                 {% if current_user == game.to_user %}
-                    <div>{{game.game_option}}</div>
-                    <div><span>나</span> : {{ game.to_user_card_num }}</div>
-                    <div><span>{{ game.from_user }}</span> : {{ game.from_user_card_num }}</div>
+                    <div class='game_option'>{{game.game_option}}</div>
+                    <div>나 : {{ game.to_user_card_num }}</div>
+                    <div>{{ game.from_user }} : {{ game.from_user_card_num }}</div>
                     <div class="user_result_detail"><span>결과</span> : {{ game.to_user_result }}</div>
                     <div class="user_result_detail"><span>점수</span> : {{ game.to_user_point }} 점</div>
 
                 {% else %}
-                    <div>{{game.game_option}}</div>
+                    <div class='game_option'>{{game.game_option}}</div>
                     <div>{{ game.to_user }} : {{ game.to_user_card_num }}</div>
                     <div>나 : {{ game.from_user_card_num }}</div>
                     <div class="user_result_detail">결과 : {{ game.from_user_result }}</div>

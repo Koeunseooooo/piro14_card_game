@@ -5,11 +5,11 @@
     <div class="main_content">
         <div class="main_content_text">
             <i class="far fa-lightbulb"></i>
-            <div> 전 세계 피로그래머와<br />한 판 승부 숫자카드게임</div>
+            <div class="main_text"> 전 세계 피로그래머와<br />한 판 승부 숫자카드게임</div>
 
         {% if user.is_authenticated %}
-
-            {{ user.username }} 님이 로그인 중
+            <div class="username">{{ user.username }} 님이 로그인 중 </div>
+            
             <!-- admin에서 이름 변경 가능 -->
             
             <a href="{% url 'game' %}">
