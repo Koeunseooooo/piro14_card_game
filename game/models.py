@@ -28,7 +28,7 @@ class CardBattle(models.Model):
     )
     # 10개 중 무작위 5개 선택 - 그 중 한 개 선택 
     # 이렇게 하면 runserver 돌릴때만 숫자가 바뀜.. 해결책 없을까잉
-    to_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="to_user", null=True, blank=True, verbose_name="도전장을 내밀 상대는?")
+    to_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="to_user", null=True, blank=True, verbose_name="공격할 상대는?")
     from_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="from_user",null=True, blank=True)
     from_user_num = models.IntegerField(null=True , blank=True)
     # 위에꺼 없어질 가능성 높음. 지금 활용 안하고 있는 중
