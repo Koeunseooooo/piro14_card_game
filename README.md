@@ -10,18 +10,17 @@
 
 ## 2. 실행 방법
 
-'''
-git clone 어쩌구 .
-python -m venv venv
-venv\Scripts\activate
-pip install -r requirements.txt
-python manage.py runserver
-'''
+
+  git clone 어쩌구 .
+  python -m venv venv
+  venv\Scripts\activate
+  pip install -r requirements.txt
+  python manage.py runserver
+
 
 소셜로그인
-'''
-admin에서 클라이언트 키 값 설정 후 저장해야함
-'''
+  admin에서 클라이언트 키 값 설정 후 저장해야함
+
 
 <br/>
 
