@@ -38,12 +38,14 @@ def ranking(request):
     profiles=Profile.objects.all()
     profiles_order=profiles.order_by("-sum_point")
 
-    num=[]
-    for i in range(1,len(users)+1):
-        num.append(i)
+    # 랭킹순위를 db에 넣는건 딱히 의미 없는 것 같으니 forloop.count로 indexing하기
+    # ( 아래는 다 주석처리 ! )
+    # num=[]
+    # for i in range(1,len(users)+1):
+    #     num.append(i)
 
-    for profile,n in zip(profiles_order, num) :
-        Profile.objects.filter(user_me=profile.user_me).update(rank=n)
+    # for profile,n in zip(profiles_order, num) :
+    #     Profile.objects.filter(user_me=profile.user_me).update(rank=n)
         
     ctx = {
         "users": users,

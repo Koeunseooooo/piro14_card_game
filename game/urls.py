@@ -2,7 +2,6 @@ from game import views
 from django.urls import path, include
 
 # app_name='game'
-# 왜 앱네임을 넣으면 오류가 뜰까?
 
 urlpatterns = [
     path('', views.main, name='main'),

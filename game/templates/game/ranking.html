@@ -10,10 +10,10 @@
             {% for rank in ranking %}
             <!-- rank.user_me가 request.user라면 글자색이나 굵기 변형을 통해 강조되었으면 좋겠으니 조건문으로 나누자 -->
             {% if rank.user_me == request.user %}
-            <div class="login_user">{{rank.rank}}등 {{ rank.user_me }}님 ! 총점수 : {{ rank.sum_point }} 점 </div>
+            <div class="login_user">{{forloop.counter}}등 {{ rank.user_me }}님 ! 총점수 : {{ rank.sum_point }} 점 </div>
             
             {% else %}
-            <div class="other_users">{{rank.rank}}등 {{ rank.user_me }}님 ! 총점수 : {{ rank.sum_point }} 점 </div>
+            <div class="other_users">{{forloop.counter}}등 {{ rank.user_me }}님 ! 총점수 : {{ rank.sum_point }} 점 </div>
             
             {% endif %}
             {% endfor %}
@@ -25,9 +25,6 @@
         </form>
     </div>
 </div>
-
-
-    
 
 {% endblock %}
 
