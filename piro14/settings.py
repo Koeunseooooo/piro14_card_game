@@ -10,7 +10,8 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
-import os
+import os, json
+from django.core.exceptions import ImproperlyConfigured
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -20,9 +21,22 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '&q_@or@(n$*1fbqjgu)o4rq_$9^5e!a4xal_^=+uc9o@)p+(h1'
-
 # SECURITY WARNING: don't run with debug turned on in production!
+# 외부에 있는 secrest.json를 활용해 secrest key 불러오기
+secret_file = os.path.join(BASE_DIR, 'secrets.json') #secrets.json을 불러와 줍니다
+
+with open(secret_file, 'r') as f: #open as로 secret.json을 열어줍니다.
+    secrets = json.loads(f.read())
+
+def get_secret(setting, secrets=secrets): #예외 처리를 통해 오류 발생을 검출합니다.
+    try:
+        return secrets[setting]
+    except KeyError:
+        error_msg = "Set the {} environment variable".format(setting)
+        raise ImproperlyConfigured(error_msg)
+
+SECRET_KEY = get_secret("SECRET_KEY")
+
 DEBUG = True
 
 ALLOWED_HOSTS = []
