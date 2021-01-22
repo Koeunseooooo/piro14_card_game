@@ -15,14 +15,26 @@
   python -m venv venv
   venv\Scripts\activate
   pip install -r requirements.txt
+  python manage.py makemigrations
+  python manage.py migrate
   python manage.py runserver
 ```
-
-
-* 소셜로그인
+* SECRET_KEY 관련 error에 관한 설정
 ```
-  admin 페이지에서 각 social login 에 관한 클라이언트 키 값 설정 후 save
+  settings.py 파일 주석 설명 참고
+
+  < 클론 후 단순 프로그램 실행을 하고 싶은 경우에 해당합니다 >
+    1. setting.py 내 start~finish 내용을 주석처리
+    2. SECRET_KEY = '.'  <- 왼쪽의 코드를 한 줄 추가
 ```
+
+* 소셜로그인 관련 error에 관한 설정
+```
+  < runserver 후 소셜로그인 관련 error가 난 경우 >
+    1. python manage.py createsuperuser -> admin페이지 접속
+    2. 각 소셜로그인에 관한 자신의 API 값을 적용
+```
+  ( API값 설정 참고 ) https://egg-money.tistory.com/117  
 
 ## 4. 주요 기능 설명 
 - 1 **메인 페이지**

@@ -23,6 +23,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: keep the secret key used in production secret!
 # SECURITY WARNING: don't run with debug turned on in production!
 # 외부에 있는 secrest.json를 활용해 secrest key 불러오기
+
+
+### start
 secret_file = os.path.join(BASE_DIR, 'secrets.json') #secrets.json을 불러와 줍니다
 
 with open(secret_file, 'r') as f: #open as로 secret.json을 열어줍니다.
@@ -36,6 +39,19 @@ def get_secret(setting, secrets=secrets): #예외 처리를 통해 오류 발생
         raise ImproperlyConfigured(error_msg)
 
 SECRET_KEY = get_secret("SECRET_KEY")
+### finish
+
+
+'''
+< 클론 후 단순 프로그램 실행을 하고 싶은 경우 >
+1. 위의 start~finish 내용을 주석처리합니다.
+2. SECRET_KEY = '.'  <- 왼쪽의 코드를 한 줄 추가합니다.
+
+< runserver 후 소셜로그인 관련 error가 난 경우 >
+1. python manage.py createsuperuser 후 admin 페이지 접속
+2. 각 소셜로그인(구글,네이버)에 관한 자신의 API 값을 적용합니다.
+( 2번 설정 참고 ) https://egg-money.tistory.com/117 '''
+
 
 DEBUG = True
 
