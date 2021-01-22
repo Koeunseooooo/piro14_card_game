@@ -8,7 +8,7 @@
         <div class="ranking_title"> Piro 명예의 전당</div>
         <div id="ranking_content_wrap">
             {% for rank in ranking %}
-            <!-- rank.user_me가 request.user라면 글자색이나 굵기 변형을 통해 강조되었으면 좋겠어용 -->
+            <!-- rank.user_me가 request.user라면 글자색이나 굵기 변형을 통해 강조되었으면 좋겠으니 조건문으로 나누자 -->
             {% if rank.user_me == request.user %}
             <div class="login_user">{{rank.rank}}등 {{ rank.user_me }}님 ! 총점수 : {{ rank.sum_point }} 점 </div>
             
