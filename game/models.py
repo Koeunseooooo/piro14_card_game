@@ -31,7 +31,6 @@ class CardBattle(models.Model):
     # 이렇게 하면 runserver 돌릴때만 숫자가 바뀜.. 좀 별론데 ... 해결책 없을까잉
     to_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="to_user", null=True, blank=True, verbose_name="공격할 상대는?")
     from_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="from_user",null=True, blank=True)
-    from_user_num = models.IntegerField(null=True , blank=True)
     to_user_card_num = models.IntegerField( null=True, blank=True, choices=CARD_CHOICES, verbose_name='내가 고른 카드' )
     from_user_card_num = models.IntegerField( null=True, blank=True, choices=CARD_CHOICES,verbose_name='내가 고른 카드' )
     result = models.CharField(max_length=255, null=True, blank=True)

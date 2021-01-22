@@ -11,60 +11,6 @@ def main(request):
 def login(request):
     return render(request, 'game/login.html')
 
-    
-def ranking(request):
-    users=User.objects.all()
-    games_all=CardBattle.objects.all()
-
-    all_user_points=[]
-    each_user_points=[]
-
-    # 이 알고리즘은 정말 최악이야.. 그냥 game view 에서 바로 update 하면될것을... 난 똥이야 ...
-    for user in users:
-        game_all_to = games_all.filter(to_user=user)
-        game_all_from = games_all.filter(from_user=user)
-        if game_all_to.exists() or game_all_from.exists():
-            for game_to in game_all_to:
-                all_user_points.append(game_to.to_user_point)
-            for game_from in game_all_from :
-                all_user_points.append(game_from.from_user_point)
-            each_user_points.append(sum(all_user_points))
-            all_user_points.clear()
-    
-
-    for user,each_user_point in zip(users, each_user_points) :
-        Profile.objects.filter(user_me=user).update(sum_point=each_user_point)
-
-    profiles=Profile.objects.all()
-    profiles_order=profiles.order_by("-sum_point")
-
-    # 랭킹순위를 db에 넣는건 딱히 의미 없는 것 같으니 forloop.count로 indexing하기
-    # ( 아래는 다 주석처리 ! )
-    # num=[]
-    # for i in range(1,len(users)+1):
-    #     num.append(i)
-
-    # for profile,n in zip(profiles_order, num) :
-    #     Profile.objects.filter(user_me=profile.user_me).update(rank=n)
-        
-    ctx = {
-        "users": users,
-        "games" : games_all , 
-        "ranking" : profiles_order ,
-
-    }
-    # each도 clear해야하는지..
-    return render(request, 'game/ranking.html', ctx)
-
-def game_list(request):
-    game_list = CardBattle.objects.all()
-    game_list_filter = game_list.filter(to_user=request.user) | game_list.filter(from_user=request.user)
-    ctx = {
-        "game_list": game_list_filter.order_by("-id"),
-        "current_user": request.user,
-    }
-    return render(request, 'game/game_list.html', ctx)
-
 def game(request):
     initial = {
         "current_user": request.user.id
@@ -75,9 +21,6 @@ def game(request):
             cardBattle=form.save()
             cardBattle.from_user = request.user
             cardBattle.result = "진행중..."
-            # cardBattle.from_user_num = request.user.id
-            # from_user_num으로 대응하는 게임번호를 찾을 수 있나?
-            # 왜 하는 거임 이거 ???
             cardBattle.save()
         return redirect("game_list")
 
@@ -100,7 +43,6 @@ def accept(request, pk):
         to_user_card_num = cardBattle.to_user_card_num
         from_user_card_num = cardBattle.from_user_card_num
         
-       
         # 여기에 랜덤으로 해야할듯??! ---> up_or_down ( 0 up / 1 down )
         cardBattle.up_or_down = random.randint(0, 2)
         up_or_down=cardBattle.up_or_down
@@ -108,8 +50,6 @@ def accept(request, pk):
             cardBattle.game_option= " 숫자가 더 큰 사람이 대결에서 이깁니다 "
         else :
             cardBattle.game_option= " 숫자가 더 작은 사람이 대결에서 이깁니다"
-        
-        
         
         cardBattle.to_user_result = random_result(to_user_card_num, from_user_card_num, up_or_down) 
         cardBattle.from_user_result = random_result(from_user_card_num, to_user_card_num, up_or_down)
@@ -140,21 +80,6 @@ def accept(request, pk):
         }
         return render(request, "game/accept.html", ctx)
 
-def detail(request, pk):
-    game = CardBattle.objects.get(pk=pk)
-    ctx = {
-        "game": game,
-        "current_user": request.user
-    }
-    return render(request, "game/detail.html", ctx)
-
-def delete(request, pk):
-    game = CardBattle.objects.get(pk=pk)
-    if request.method == "POST":
-        game.delete()
-    return redirect("game_list")
-
-
 def random_result(user1,user2,choice):
     if choice==0:
         if user1==user2:
@@ -171,5 +96,61 @@ def random_result(user1,user2,choice):
         else :
             return "승리"
     
+
+def game_list(request):
+    game_list = CardBattle.objects.all()
+    game_list_filter = game_list.filter(to_user=request.user) | game_list.filter(from_user=request.user)
+    ctx = {
+        "game_list": game_list_filter.order_by("-id"),
+        "current_user": request.user,
+    }
+    return render(request, 'game/game_list.html', ctx)
+
+def detail(request, pk):
+    game = CardBattle.objects.get(pk=pk)
+    ctx = {
+        "game": game,
+        "current_user": request.user
+    }
+    return render(request, "game/detail.html", ctx)
+    
+def ranking(request):
+    users=User.objects.all()
+    games_all=CardBattle.objects.all()
+
+    all_user_points=[]
+    each_user_points=[]
+
+    # 그냥 game view 에서 바로 update 하면될것을... 난 똥이야 ...
+    for user in users:
+        game_all_to = games_all.filter(to_user=user)
+        game_all_from = games_all.filter(from_user=user)
+        if game_all_to.exists() or game_all_from.exists():
+            for game_to in game_all_to:
+                all_user_points.append(game_to.to_user_point)
+            for game_from in game_all_from :
+                all_user_points.append(game_from.from_user_point)
+            each_user_points.append(sum(all_user_points))
+            all_user_points.clear()
+    
+    for user,each_user_point in zip(users, each_user_points) :
+        Profile.objects.filter(user_me=user).update(sum_point=each_user_point)
+
+    profiles=Profile.objects.all()
+    profiles_order=profiles.order_by("-sum_point")
+        
+    ctx = {
+        "users": users,
+        "games" : games_all , 
+        "ranking" : profiles_order ,
+
+    }
+    return render(request, 'game/ranking.html', ctx)
+
+def delete(request, pk):
+    game = CardBattle.objects.get(pk=pk)
+    if request.method == "POST":
+        game.delete()
+    return redirect("game_list")
 
 
